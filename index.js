@@ -2,11 +2,16 @@
 
 
 var kraken = require('kraken-js'),
+	paypal = require('paypal-rest-sdk'),
     app = {};
 
 
 app.configure = function configure(nconf, next) {
     // Async method run on startup.
+	
+	paypal.configure(nconf.get('paypalConfig'));
+	
+	
     next(null);
 };
 

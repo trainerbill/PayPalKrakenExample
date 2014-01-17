@@ -1,0 +1,50 @@
+{>"layouts/master" /}
+
+{<body}
+	<div class="container" data-ng-app="payment" data-ng-controller="PaymentForm" data-ng-init="variables.csrf='{_csrf}'">
+		<div class="row">
+		    <div class="col-md-6 ">
+		    	<div ng-show="!processing">
+		    
+				    <h3>{@pre type="content" key="greeting"/}</h3>
+				    <p>{@pre type="content" key="message"/}</p>
+				    
+				    <form role="form" action="" method="post">
+				    	<div class="form-group">
+				    		<label for="receiver">To</label>
+				    		<input type="email" class="form-control" data-ng-model="variables.email" />
+				    	</div>
+				    	<div class="form-group">
+				    		<label for="receiver">Amount</label>
+				    		<input type="number" class="form-control" data-ng-model="variables.amount"/>
+				    	</div>
+				    	
+				    	<div class="form-group">
+				    		<label for="receiver">Message</label>
+				    		<textarea rows="3" class="form-control" data-ng-model="variables.message"></textarea>
+				    	</div>
+				    	
+				    	<div class="form-group">
+				    		<label for="receiver">Reason</label>
+				    		<select class="form-control" data-ng-model="variables.reason">
+				    			  <option value=""></option>
+				    			  <option value="I am sending money to family or friends">I am sending money to family or friends</option>
+								  <option value="I am paying for goods or services">I am paying for goods or services</option>
+							</select>
+				    	</div>
+				    	
+				    	<div class="btn btn-warning">Clear</div>
+				    	<div style="float:right" class="btn btn-primary" data-ng-click="process()">Next</div>
+				    </div>
+				    <div ng-show="processing">
+				    	<img src="img/loading.gif" alt="loading" />
+				    </div>
+			    	
+			    	 
+			    </form>
+			</div>
+		</div>
+	    
+	</div>
+	<script type="text/javascript" src="js/angularapps/payment.js"></script>
+{/body}
