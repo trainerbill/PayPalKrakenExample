@@ -1,2 +1,3 @@
-PayPalKrakenExample
-===================
+# .
+
+"My Kraken Example"
