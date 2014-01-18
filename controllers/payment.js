@@ -17,7 +17,30 @@ module.exports = function (app) {
     
     app.post('/payment', function (req, res) {
         
-        console.log(req.body);
+    	//Exchange data with the model
+    	model.exchangeData(req.body);
+    	
+    	//Perform Model validation
+    	model.modelValidation();
+    	
+    	//Check Validation
+    	if(Object.keys(model.validation).length > 0)
+    	{
+    		//Validation Errors
+    		res.writeHead(500, { 'Content-Type': 'application/json' });
+            res.write(JSON.stringify(model.validation));
+            res.end();
+    	}
+    	else
+    	{
+    		//Do the Paypal payment
+    		res.writeHead(200, { 'Content-Type': 'application/json' });
+            res.write(JSON.stringify(model.validation));
+            res.end();
+    	}
+    	
+    	
+        
         
     });
 };

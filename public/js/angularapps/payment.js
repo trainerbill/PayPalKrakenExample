@@ -10,9 +10,10 @@ var payment = angular.module('payment', [])
 	$scope.variables = {};
 	$scope.validation = {};
 	$scope.variables.currency = "USD";
+	$scope.skipClientValidation = 1;
 	
 	$scope.process = function(){
-	
+		$scope.processing = 1;
 		var data = {
 					
 					'email': $scope.variables.email,
@@ -25,7 +26,22 @@ var payment = angular.module('payment', [])
 		};
 		
 		if($scope.processValidation(data))
-			$http.post('/payment',data);
+		{
+			$http.post('/payment',data).success(function(response){
+				$scope.validation = {};
+				console.log(response);
+				$scope.processing = 0;
+				
+			}).error(function(response){
+				
+				$scope.validation = response;
+				$scope.processing = 0;
+			});
+		}
+		else
+			$scope.processing = 0;
+		
+		
 	}
 	
 	$scope.setVariables = function(variables){
@@ -39,21 +55,23 @@ var payment = angular.module('payment', [])
 	
 	$scope.processValidation = function(data)
 	{
-		console.log(data);
-		$scope.validation = {};
-		if(data.email == undefined)
-			$scope.validation.email = true;
-		if(data.amount == undefined || data.amount < 0)
-			$scope.validation.amount = true;
-		if(data.currency != 'USD' && data.currency != 'EUR' && data.currency != 'JPY')
-			$scope.validation.currency = true;
-		if(data.reason == undefined)
-			$scope.validation.reason = true;
-		
-		angular.forEach($scope.validation, function(value, key){
-			if(value)
-				return false;
-		});
+		if(!$scope.skipClientValidation)
+		{
+			$scope.validation = {};
+			if(data.email == undefined)
+				$scope.validation.email = true;
+			if(data.amount == undefined || data.amount < 0)
+				$scope.validation.amount = true;
+			if(data.currency != 'USD' && data.currency != 'EUR' && data.currency != 'JPY')
+				$scope.validation.currency = true;
+			if(data.reason == undefined)
+				$scope.validation.reason = true;
+			
+			angular.forEach($scope.validation, function(value, key){
+				if(value)
+					return false;
+			});
+		}
 		
 		return true;
 	}
