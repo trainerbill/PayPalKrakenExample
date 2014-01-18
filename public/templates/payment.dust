@@ -1,7 +1,7 @@
 {>"layouts/master" /}
 
 {<body}
-	<div class="container" data-ng-app="payment" data-ng-controller="PaymentForm" data-ng-init="variables.csrf='{_csrf}'">
+	<div class="container" data-ng-app="payment" data-ng-controller="PaymentForm" data-ng-init="csrf='{_csrf}'">
 		<div class="row">
 		    <div class="col-md-6 ">
 		    	<div ng-show="!processing">
@@ -10,13 +10,30 @@
 				    <p>{@pre type="content" key="message"/}</p>
 				    
 				    <form role="form" action="" method="post">
-				    	<div class="form-group">
+				    	<div class="form-group" data-ng-class="{~lb}'has-error': validation.email{~rb}">
 				    		<label for="receiver">To</label>
-				    		<input type="email" class="form-control" data-ng-model="variables.email" />
+				    		<input type="email" ng-required class="form-control" data-ng-model="variables.email" />
 				    	</div>
-				    	<div class="form-group">
+				    	<div class="form-group input-group" data-ng-class="{~lb}'has-error': validation.amount || validation.currency{~rb}">
 				    		<label for="receiver">Amount</label>
-				    		<input type="number" class="form-control" data-ng-model="variables.amount"/>
+				    		<div class="input-group">
+					    		<span data-ng-show="variables.currency=='USD'" class="input-group-addon">$</span>
+					    		<span data-ng-show="variables.currency=='EUR'"class="input-group-addon">&euro;</span>
+					    		<span data-ng-show="variables.currency=='JPY'"class="input-group-addon">&yen;</span>
+					    	
+					    		<input type="number" required class="form-control" data-ng-model="variables.amount"/>
+				    		
+								<div class="input-group-btn">
+						        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">{~lb}{~lb}variables.currency{~rb}{~rb} <span class="caret"></span></button>
+						        <ul class="dropdown-menu">
+						          <li><a data-ng-click="setVariables({'currency':'USD'})">USD</a></li>
+						          <li><a data-ng-click="setVariables({'currency':'EUR'})">EUR</a></li>
+						          <li><a data-ng-click="setVariables({'currency':'JPY'})">JPY</a></li>
+						        </ul>
+						        <input type="hidden" data-ng-model="variables.currency" />
+						      </div><!-- /btn-group -->
+						     </div>
+							
 				    	</div>
 				    	
 				    	<div class="form-group">
@@ -24,16 +41,16 @@
 				    		<textarea rows="3" class="form-control" data-ng-model="variables.message"></textarea>
 				    	</div>
 				    	
-				    	<div class="form-group">
+				    	<div class="form-group" data-ng-class="{~lb}'has-error': validation.reason{~rb}">
 				    		<label for="receiver">Reason</label>
-				    		<select class="form-control" data-ng-model="variables.reason">
+				    		<select class="form-control" required data-ng-model="variables.reason">
 				    			  <option value=""></option>
 				    			  <option value="I am sending money to family or friends">I am sending money to family or friends</option>
 								  <option value="I am paying for goods or services">I am paying for goods or services</option>
 							</select>
 				    	</div>
 				    	
-				    	<div class="btn btn-warning">Clear</div>
+				    	<div class="btn btn-warning" data-ng-click="clearForm()">Clear</div>
 				    	<div style="float:right" class="btn btn-primary" data-ng-click="process()">Next</div>
 				    </div>
 				    <div ng-show="processing">

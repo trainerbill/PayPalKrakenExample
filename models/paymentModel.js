@@ -7,7 +7,8 @@ module.exports = function paymentModel() {
 			receiver: '',
 			amount: '',
 			message:'',
-			reason:''
+			reason:'',
+			currency:''
 	};
 	
 };
