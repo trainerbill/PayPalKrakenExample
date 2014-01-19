@@ -33,10 +33,57 @@ module.exports = function (app) {
     	}
     	else
     	{
+    		/*
     		//Do the Paypal payment
-    		res.writeHead(200, { 'Content-Type': 'application/json' });
-            res.write(JSON.stringify(model.validation));
-            res.end();
+    		var payment = {
+				"intent": "sale",
+				"payer": {
+				    "payment_method": "paypal"
+				},
+				"redirect_urls":{
+				    "return_url":"//"+req.headers.host + "/success",
+				    "cancel_url":"//"+req.headers.host + "/cancel"
+				  },
+				'transactions': []
+            };
+    		
+    		
+    		
+    		//Set the total to charge the customer
+            payment.transactions[0] = {
+                amount: {
+                    total: model.amount,
+                    currency: model.currency
+                },
+                description: model.reason
+            };
+            
+          //Execute the payment.
+            paypal.payment.create(payment, {}, function (err, resp) {
+                if (err) {
+                    console.log(err);
+                    res.render('result',{result:'Error :('});
+                    return;
+                }
+
+                if (resp) {
+                    delete req.session.cart;
+                    delete req.session.displayCart;
+                    res.render('result',{result:'Success :)'});
+                }
+            });
+    		
+            //console.log(req);
+    		*/
+    		
+    		//Give it time to display the loading
+    		setTimeout(function() {
+    			res.writeHead(200, { 'Content-Type': 'application/json' });
+    			res.write(JSON.stringify({amount:model.amount,currency:model.currency,reason:model.reason,email:model.email}));
+                res.end();
+    		}, 3000);	
+    	
+            
     	}
     	
     	

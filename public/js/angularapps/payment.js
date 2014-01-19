@@ -8,12 +8,14 @@ var payment = angular.module('payment', [])
 })
 .controller('PaymentForm',function($scope,$http){
 	$scope.variables = {};
+	$scope.pay = {};
 	$scope.validation = {};
 	$scope.variables.currency = "USD";
-	$scope.skipClientValidation = 1;
+	$scope.skipClientValidation = 0;
+	$scope.pay.good = 0;
 	
 	$scope.process = function(){
-		$scope.processing = 1;
+		$scope.pay.processing = 1;
 		var data = {
 					
 					'email': $scope.variables.email,
@@ -29,17 +31,19 @@ var payment = angular.module('payment', [])
 		{
 			$http.post('/payment',data).success(function(response){
 				$scope.validation = {};
-				console.log(response);
-				$scope.processing = 0;
+				$scope.pay.processing = 0;
+				$scope.pay.good = 1;
+				$scope.pay.data = response;
+				console.log($scope.pay);
 				
 			}).error(function(response){
 				
 				$scope.validation = response;
-				$scope.processing = 0;
+				$scope.pay.processing = 0;
 			});
 		}
 		else
-			$scope.processing = 0;
+			$scope.pay.processing = 0;
 		
 		
 	}
