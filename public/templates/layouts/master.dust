@@ -30,6 +30,7 @@
 		            <ul class="nav navbar-nav">
 		                <li><a href="/">{@pre type="content" key="master.home"/}</a></li>
 		                <li><a href="/sendmoney">{@pre type="content" key="master.send"/}</a></li>
+		                <li><a href="/payment">{@pre type="content" key="master.payment"/}</a></li>
 		                <li><a href="/history">{@pre type="content" key="master.history"/}</a></li>
 		            </ul>
 		        </div>
