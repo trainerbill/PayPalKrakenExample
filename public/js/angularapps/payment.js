@@ -14,6 +14,8 @@ var payment = angular.module('payment', [])
 	$scope.skipClientValidation = 0;
 	$scope.pay.good = 0;
 	
+	
+	
 	$scope.process = function(){
 		$scope.pay.processing = 1;
 		var data = {
@@ -88,6 +90,8 @@ var payment = angular.module('payment', [])
 		$scope.variables.currency = 'USD';
 		//$scope.variables.email = undefined;		//There must be a bug in angular that is not allowing me to set an input of type email to undefined.  serverside validation will take care of this.
 	}
+	
+	
 	
 	
 });

@@ -79,7 +79,7 @@ module.exports = function (app) {
     		//Give it time to display the loading
     		setTimeout(function() {
     			res.writeHead(200, { 'Content-Type': 'application/json' });
-    			res.write(JSON.stringify({amount:model.amount,currency:model.currency,reason:model.reason,email:model.email}));
+    			res.write(JSON.stringify(model));
                 res.end();
     		}, 3000);	
     	

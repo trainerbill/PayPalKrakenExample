@@ -1,0 +1,63 @@
+{>"layouts/master" /}
+
+{<body}
+	<div class="container">
+	    <h1>{@pre type="content" key="greeting"/}</h1>
+	    <p>{@pre type="content" key="message"/}</p>
+	</div>
+	<div data-ng-app="history" data-ng-controller="HistoryView" class="container">
+		<div data-ng-show="!transaction">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Date</th>
+						<th>To</th>
+						<th>Amount</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr data-ng-repeat="trx in history.payments" style="cursor:pointer" data-ng-click="setTransaction(trx)">
+						<td>{~lb}{~lb}trx.date{~rb}{~rb}</td>
+						<td>{~lb}{~lb}trx.email{~rb}{~rb}</td>
+						<td><span ng-bind-html="trx.currencycode"></span>{~lb}{~lb}trx.amount{~rb}{~rb}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div data-ng-show="transaction">
+			<table class="table">
+				<thead>
+				</thead>
+				<tbody>
+					<tr>
+						<td>ID</td>
+						<td>{~lb}{~lb}transaction.id{~rb}{~rb}</td>
+					</tr>
+					<tr>
+						<td>Email</td>
+						<td>{~lb}{~lb}transaction.email{~rb}{~rb}</td>
+					</tr>
+					<tr>
+						<td>Amount</td>
+						<td>{~lb}{~lb}transaction.amount{~rb}{~rb}</td>
+					</tr>
+					<tr>
+						<td>Currency</td>
+						<td>{~lb}{~lb}transaction.currency{~rb}{~rb}</td>
+					</tr>
+					<tr>
+						<td>Reason</td>
+						<td>{~lb}{~lb}transaction.reason{~rb}{~rb}</td>
+					</tr>
+					<tr>
+						<td>Message</td>
+						<td>{~lb}{~lb}transaction.message{~rb}{~rb}</td>
+					</tr>
+					
+				</tbody>
+			</table>
+			<div class="btn btn-default btn-sm" data-ng-click="clearTransaction()">View All Transactions</div>
+		</div>
+	</div>
+	<script type="text/javascript" src="js/angularapps/history.js"></script>
+{/body}

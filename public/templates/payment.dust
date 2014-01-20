@@ -52,10 +52,10 @@
 				</form>
 			</div>
 			<div data-ng-show="pay.processing">
-				<img src="img/loading.gif" alt="loading" />
+				<img class="img-responsive" src="img/loading.gif" alt="loading" />
 			</div>
 			<div data-ng-show="pay.good">
-				You have sent <span data-ng-show="pay.data.currency=='EUR'">&euro;</span><span data-ng-show="pay.data.currency=='JPY'">&yen;</span><span data-ng-show="pay.data.currency=='USD'">$</span>{~lb}{~lb}pay.data.amount.toFixed(2){~rb}{~rb} {~lb}{~lb}pay.data.currency{~rb}{~rb} to {~lb}{~lb}pay.data.email{~rb}{~rb}
+				You have sent {~lb}{~lb}getCurrencyHtml(pay.data.currency) + pay.data.amount + ' ' +pay.data.currency + ' to ' + pay.data.email{~rb}{~rb}
 			</div>		
 		</div>
 	</div>
