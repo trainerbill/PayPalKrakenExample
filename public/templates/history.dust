@@ -16,7 +16,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr data-ng-repeat="trx in history.payments" style="cursor:pointer" data-ng-click="setTransaction(trx)">
+					<tr data-ng-repeat="trx in history.payments | orderBy: '-date'" style="cursor:pointer" data-ng-click="setTransaction(trx)">
 						<td>{~lb}{~lb}trx.date{~rb}{~rb}</td>
 						<td>{~lb}{~lb}trx.email{~rb}{~rb}</td>
 						<td><span ng-bind-html="trx.currencycode"></span>{~lb}{~lb}trx.amount{~rb}{~rb}</td>

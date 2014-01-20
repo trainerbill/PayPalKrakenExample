@@ -7,64 +7,41 @@ var PaymentModel = require('../models/paymentModel');
 module.exports = function (app) {
 
     //var model = new HistoryModel();
-	
-	//Setup Payments.  Normally out of a DB
 	var payments = [];
-	//Create Model
-	var payment = new PaymentModel();
-	payment.exchangeData({
-		id: "PAY-17S8410768582940NKEE66EQ",
-		date:'1/1/2014',
-		email:'betty.rubble@gmail.com',
-		amount:3.52,
-		currency: 'USD',
-		message: 'This is a payment to Wilma for some food.',
-		reason:'I am paying for goods or services'
-		
-	});
-	payments.push(payment);
+	var emails = ['betty.rubble@gmail.com','barney.rubble@gmail.com','fred.flintstone@gmail.com','wilma.flintstone@gmail.com'];
+	var currencys = ['USD','EUR','JPY'];
+	var reasons = ['I am paying for goods or services','I am sending money to family or friends'];
 	
-	//Create Model
-	var payment = new PaymentModel();
-	payment.exchangeData({
-		id: "PAY-17S8410768582940NKEE66ER",
-		date:'1/3/2014',
-		email:'barney.rubble@gmail.com',
-		amount: 53.50,
-		currency: 'EUR',
-		message: 'This is a payment to Fred.  I owe him some money.',
-		reason:'I am sending money to family or friends'
+
+	//Setup Payments.  Normally out of a DB.  Would rather use randoms but requirements say the output needs to be the same each run.
+	for(var i = 4; i < 254;i++){
+		//Create Model
+		var payment = new PaymentModel();
+		var emailmodulus = i % 4;
+		var currencymodulus = i % 3;
+		var amount = (i + 52.67) / 1.46;
+		var datemodulus = i % 19;
+		var date = 20 - datemodulus;
+		if(date < 10)
+			date = '0' + date;
+		var reasonmodulus = i % 2;
 		
-	});
-	payments.push(payment);
+		payment.exchangeData({
+			id: i,
+			date:'1/'+date+'/2014',
+			email: emails[emailmodulus],
+			amount:amount,
+			currency: currencys[currencymodulus],
+			message: 'This is a payment to '+emails[emailmodulus],
+			reason: reasons[reasonmodulus]
+			
+		});
+		payments.push(payment);
+	}
 	
-	//Create Model
-	var payment = new PaymentModel();
-	payment.exchangeData({
-		id: "PAY-17S8410768582940NKEE66ES",
-		date:'1/4/2014',
-		email:'fred.flintstone@gmail.com',
-		amount:13.68,
-		currency: 'JPY',
-		message: 'This is a payment to Fred for some cool stuff',
-		reason:'I am paying for goods or services'
-		
-	});
-	payments.push(payment);
 	
-	//Create Model
-	var payment = new PaymentModel();
-	payment.exchangeData({
-		id: "PAY-17S8410768582940NKEE66ET",
-		date:'1/7/2014',
-		email:'wilma.flintstone@gmail.com',
-		amount:99.90,
-		currency: 'USD',
-		message: 'This is a payment to Fred.  He is trapped and needs  money.',
-		reason:'I am sending money to family or friends'
-		
-	});
-	payments.push(payment);
+	
+	
 	
 
     app.get('/history', function (req, res) {
