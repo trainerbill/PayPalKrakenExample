@@ -48,14 +48,18 @@
 					</div>
 				    	
 					<div class="btn btn-warning" data-ng-click="clearForm()">Clear</div>
-					<div style="float:right" class="btn btn-primary" data-ng-click="process()">Next</div>
+					<div class="btn btn-primary pull-right" data-ng-click="process()">Next</div>
 				</form>
 			</div>
 			<div data-ng-show="pay.processing">
 				<img class="img-responsive" src="img/loading.gif" alt="loading" />
 			</div>
 			<div data-ng-show="pay.good">
-				You have sent {~lb}{~lb}getCurrencyHtml(pay.data.currency) + pay.data.amount + ' ' +pay.data.currency + ' to ' + pay.data.email{~rb}{~rb}
+				<div style="padding-bottom:3em">
+					You have sent {~lb}{~lb}getCurrencyHtml(pay.data.currency) + pay.data.amount + ' ' +pay.data.currency + ' to ' + pay.data.email{~rb}{~rb}
+				</div>
+				<a class="btn btn-primary" href="/payment">Send Money</a>
+				<a class="btn btn-primary pull-right" href="/history">History</a>
 			</div>		
 		</div>
 	</div>
