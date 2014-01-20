@@ -2,7 +2,7 @@
 
 
 //var HistoryModel = require('../models/historyModel');
-var PaymentModel = require('../models/paymentModel');
+var sendMoneyModel = require('../models/sendMoneyModel');
 
 module.exports = function (app) {
 
@@ -16,7 +16,7 @@ module.exports = function (app) {
 	//Setup Payments.  Normally out of a DB.  Would rather use randoms but requirements say the output needs to be the same each run.
 	for(var i = 4; i < 254;i++){
 		//Create Model
-		var payment = new PaymentModel();
+		var payment = new sendMoneyModel();
 		var emailmodulus = i % 4;
 		var currencymodulus = i % 3;
 		var amount = (i + 52.67) / 1.46;

@@ -1,4 +1,4 @@
-var payment = angular.module('payment', [])
+var sendmoney = angular.module('sendmoney', [])
 .directive('eatClick', function() {
     return function(scope, element, attrs) {
         $(element).click(function(event) {
@@ -6,7 +6,7 @@ var payment = angular.module('payment', [])
         });
     }
 })
-.controller('PaymentForm',function($scope,$http){
+.controller('SendMoneyForm',function($scope,$http){
 	$scope.variables = {};
 	$scope.pay = {};
 	$scope.validation = {};
@@ -31,7 +31,7 @@ var payment = angular.module('payment', [])
 		
 		if($scope.processValidation(data))
 		{
-			$http.post('/payment',data).success(function(response){
+			$http.post('/sendmoney',data).success(function(response){
 				$scope.validation = {};
 				$scope.pay.processing = 0;
 				$scope.pay.good = 1;

@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = function paymentModel() {
+module.exports = function sendMoneyModel() {
 	
 	return {
 			

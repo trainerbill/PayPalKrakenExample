@@ -1,7 +1,7 @@
 {>"layouts/master" /}
 
 {<body}
-<div class="container" data-ng-app="payment" data-ng-controller="PaymentForm" data-ng-init="csrf='{_csrf}'">
+<div class="container" data-ng-app="sendmoney" data-ng-controller="SendMoneyForm" data-ng-init="csrf='{_csrf}'">
 	<div class="row">
 		<div class="col-md-6 ">
 		    <div data-ng-show="!pay.processing && !pay.good">
@@ -58,11 +58,11 @@
 				<div style="padding-bottom:3em">
 					You have sent {~lb}{~lb}getCurrencyHtml(pay.data.currency) + pay.data.amount + ' ' +pay.data.currency + ' to ' + pay.data.email{~rb}{~rb}
 				</div>
-				<a class="btn btn-primary" href="/payment">Send Money</a>
+				<a class="btn btn-primary" href="/sendmoney">Send Money</a>
 				<a class="btn btn-primary pull-right" href="/history">History</a>
 			</div>		
 		</div>
 	</div>
 </div>
-	<script type="text/javascript" src="js/angularapps/payment.js"></script>
+	<script type="text/javascript" src="js/angularapps/sendmoney.js"></script>
 {/body}
