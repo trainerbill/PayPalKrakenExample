@@ -13,7 +13,7 @@ Setup
 ==========================
 1.  git clone https://github.com/trainerbill/PayPalKrakenExample.git
 2.  cd PayPalKrakenExample
-3.	git checkout <the tag of the release you want to use>
+3.	git checkout thetagofthereleaseyouwant
 4.  npm install
 5.  npm start
 6.   Go to http://localhost:8000 in your browser.
