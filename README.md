@@ -5,7 +5,7 @@ This is an example application built using PayPal Kraken and Node JS.  The appli
 
 Releases
 ==========================
-v1.x - Version 1 is the requirements based on the documentation provided
+v1.x - Version 1 is the requirements based on the documentation provided<br/>
 v2.x - Attempt to use PayPal Rest SDK to pull in real transactions
 
 
