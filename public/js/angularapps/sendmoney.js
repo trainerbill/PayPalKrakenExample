@@ -36,7 +36,7 @@ var sendmoney = angular.module('sendmoney', [])
 				$scope.pay.processing = 0;
 				$scope.pay.good = 1;
 				$scope.pay.data = response;
-				console.log($scope.pay);
+				
 				
 			}).error(function(response){
 				

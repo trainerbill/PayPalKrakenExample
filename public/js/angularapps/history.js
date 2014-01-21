@@ -13,7 +13,7 @@ var history = angular.module('history', ['ngSanitize'])
 	$http.get('/history/send').success(function(response){
 		
 		$scope.history = response;
-		console.log($scope.history);
+		
 		
 	}).error(function(response){
 		

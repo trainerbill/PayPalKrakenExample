@@ -32,6 +32,7 @@
 		                <li><a href="/sendmoney">{@pre type="content" key="master.send"/}</a></li>
 		                <li><a href="/payment">{@pre type="content" key="master.payment"/}</a></li>
 		                <li><a href="/history">{@pre type="content" key="master.history"/}</a></li>
+		                <li><a href="/paymenthistory">{@pre type="content" key="master.paymenthistory"/}</a></li>
 		            </ul>
 		        </div>
 	        </div>

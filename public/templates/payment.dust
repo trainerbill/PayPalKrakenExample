@@ -1,0 +1,134 @@
+{>"layouts/master" /}
+
+{<body}
+<div class="container" data-ng-app="payment" data-ng-controller="PaymentForm" data-ng-init="csrf='{_csrf}'">
+	<div class="row">
+		<div class="col-md-6">
+		    <div data-ng-show="!pay.processing && !pay.success">
+				<h3>{@pre type="content" key="greeting"/}</h3>
+				<p>{@pre type="content" key="message"/}</p>
+				<div class="btn btn-danger" data-ng-click="populateForm()">Populate Form For Testing</div>
+				<form role="form" action="" method="post">
+				    
+				    <div class="form-group row" data-ng-class="{~lb}'has-error': validation.email{~rb}">
+				    	<div class="col-md-6">
+					    	<label for="creditcard">First Name</label>
+					    	<input type="text" data-ng-required class="form-control" data-ng-model="credit_card.first_name" />
+					    </div>
+					    <div class="col-md-6">
+					    	<label for="creditcard">Last Name</label>
+					    	<input type="text" data-ng-required class="form-control" data-ng-model="credit_card.last_name" />
+					    </div>
+				    </div>
+				    
+				    <div class="form-group row">
+				    	<div class="col-md-12">
+					    	<label>Street</label>
+					    	<input type="text" data-ng-required class="form-control" data-ng-model="credit_card.billing_address.line1" />
+					    </div>
+				    </div>
+				    
+				    <div class="form-group row">
+				     	<div class="col-md-5">
+					    	<label>City</label>
+					    	<input type="text" data-ng-required class="form-control" data-ng-model="credit_card.billing_address.city" />
+						</div>
+					    <div class="col-md-2">
+					    	<label>State</label>
+					    	<input type="text" data-ng-required class="form-control" data-ng-model="credit_card.billing_address.state" />
+					    </div>
+					    <div class="col-md-3">
+					    	<label>Zip</label>
+					    	<input type="text" data-ng-required class="form-control" data-ng-model="credit_card.billing_address.postal_code" />
+					    </div>
+					     <div class="col-md-2">
+					    	<label>Country</label>
+					    	<input type="text" data-ng-required class="form-control" data-ng-model="credit_card.billing_address.country_code" />
+					    </div>
+				    </div>
+				    
+				    <div class="form-group row" data-ng-class="{~lb}'has-error': validation.email{~rb}">
+				    	<div class="col-md-12">
+					    	<label for="creditcard">Credit Card</label>
+					    	<input type="text" data-ng-required class="form-control" data-ng-model="credit_card.number" />
+					    </div>
+				    </div>
+				    <div class="form-group row">
+				     	<div class="col-md-2">
+					    	<label for="creditcard">Month</label>
+					    	<input type="text" data-ng-required class="form-control" data-ng-model="credit_card.expire_month" />
+						</div>
+					    <div class="col-md-2">
+					    	<label for="creditcard">Year</label>
+					    	<input type="text" data-ng-required class="form-control" data-ng-model="credit_card.expire_year" />
+					    </div>
+					    <div class="col-md-2">
+					    	<label for="creditcard">CVV2</label>
+					    	<input type="text" data-ng-required class="form-control" data-ng-model="credit_card.cvv2" />
+					    </div>
+					   
+				    </div>
+				    
+				    
+				    <div class="form-group input-group">
+				    	<label>Amount</label>
+						<div class="input-group">
+							<span data-ng-show="amount.currency=='USD'" class="input-group-addon">$</span>
+					    	<span data-ng-show="amount.currency=='EUR'"class="input-group-addon">&euro;</span>
+					    	<span data-ng-show="amount.currency=='JPY'"class="input-group-addon">&yen;</span>
+					    	
+							<input type="text" required class="form-control" data-ng-model="amount.total"/>
+							<div class="input-group-btn">
+								<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">{~lb}{~lb}amount.currency{~rb}{~rb} <span class="caret"></span></button>
+								<ul class="dropdown-menu">
+						        	<li><a data-ng-click="amount.currency='USD'">USD</a></li>
+									<li><a data-ng-click="amount.currency='EUR'">EUR</a></li>
+									<li><a data-ng-click="amount.currency='JPY'">JPY</a></li>
+								</ul>
+								
+							</div><!-- /btn-group -->
+						</div>		
+				    </div>
+				    	
+				    <div class="form-group">
+				    	<label for="receiver">Description</label>
+				    	<textarea rows="3" class="form-control" data-ng-model="description"></textarea>
+				    </div>
+				    
+				    	
+					<div class="btn btn-warning" data-ng-click="init()">Clear</div>
+					<div class="btn btn-primary pull-right" data-ng-click="process()">Next</div>
+				</form>
+			</div>
+			<div data-ng-show="pay.processing">
+				<img class="img-responsive" src="img/loading.gif" alt="loading" />
+			</div>
+			<div data-ng-show="pay.success" class="row">
+				<div class="col-md-12">
+					<h3>Payment Success</h3>
+					<table class="table">
+						<thead>
+							
+						</thead>
+						<tbody>
+							<tr>
+								<td>Transaction ID</td>
+								<td>{~lb}{~lb}pay.data.id{~rb}{~rb}</td>
+							</tr>
+							<tr>
+								<td>Timestamp</td>
+								<td>{~lb}{~lb}pay.data.create_time{~rb}{~rb}</td>
+							</tr>
+							<tr>
+								<td>Status</td>
+								<td>{~lb}{~lb}pay.data.state{~rb}{~rb}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>		
+		</div>
+	</div>
+</div>
+	<script type="text/javascript" src="js/angularapps/payment.js"></script>
+{/body}

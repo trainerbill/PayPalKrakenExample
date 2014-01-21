@@ -1,0 +1,72 @@
+{>"layouts/master" /}
+
+{<body}
+	<div class="container">
+	    <h1>{@pre type="content" key="greeting"/}</h1>
+	    <p>{@pre type="content" key="message"/}</p>
+	</div>
+	<div data-ng-app="paymenthistory" data-ng-controller="PaymentHistoryView" class="container">
+		<div data-ng-show="!transaction && !processing">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Date</th>
+						<th>Credit Card</th>
+						<th>Amount</th>
+						<th>State</th>
+						<th>Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr data-ng-repeat="trx in history.payments" style="cursor:pointer" data-ng-click="setTransaction(trx)">
+						<td>{~lb}{~lb}trx.create_time{~rb}{~rb}</td>
+						<td>{~lb}{~lb}trx.payer.funding_instruments[0].credit_card.number{~rb}{~rb}</td>
+						<td>{~lb}{~lb}trx.transactions[0].amount.total{~rb}{~rb}</td>
+						<td>{~lb}{~lb}trx.state{~rb}{~rb}</td>
+						<td>{~lb}{~lb}trx.transactions[0].description{~rb}{~rb}</td>
+					</tr>
+				</tbody>
+			</table>
+			<div data-ng-show="!nomore" class="btn btn-default btn-sm" data-ng-click="getTransactions()">More Transactions</div>
+			<div data-ng-show="start > 11" class="btn btn-default btn-sm" data-ng-click="getTransactions(1)">Previous Transactions</div>
+		</div>
+		<div data-ng-show="transaction">
+			<table class="table">
+				<thead>
+				</thead>
+				<tbody>
+					<tr>
+						<td>ID</td>
+						<td>{~lb}{~lb}transaction.id{~rb}{~rb}</td>
+					</tr>
+					<tr>
+						<td>Credit Card</td>
+						<td>{~lb}{~lb}transaction.payer.funding_instruments[0].credit_card.number{~rb}{~rb}</td>
+					</tr>
+					<tr>
+						<td>Amount</td>
+						<td>{~lb}{~lb}transaction.transactions[0].amount.total{~rb}{~rb}</td>
+					</tr>
+					<tr>
+						<td>Currency</td>
+						<td>{~lb}{~lb}transaction.transactions[0].amount.currency{~rb}{~rb}</td>
+					</tr>
+					<tr>
+						<td>Timestamp</td>
+						<td>{~lb}{~lb}transaction.create_time{~rb}{~rb}</td>
+					</tr>
+					<tr>
+						<td>Intent</td>
+						<td>{~lb}{~lb}transaction.intent{~rb}{~rb}</td>
+					</tr>
+					
+				</tbody>
+			</table>
+			<div class="btn btn-default btn-sm" data-ng-click="clearTransaction()">View All Transactions</div>
+		</div>
+		<div data-ng-show="processing">
+			<img class="img-responsive" src="img/loading.gif" alt="loading" />
+		</div>
+	</div>
+	<script type="text/javascript" src="js/angularapps/paymenthistory.js"></script>
+{/body}
