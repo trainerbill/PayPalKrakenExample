@@ -24,6 +24,9 @@ Functionality
 ==========================
 1.  Mock make Payments to a user.  Does not actually execute a PayPal API call
 2.  Mock view transaction history.  Does not actually execute a PayPal API call
+3.  Version 2.x only.  Credit card payment via paypal rest api sdk
+3.  Version 2.x only.  View payments via PP rest api sdk
+
 
 Technologies Used
 ==========================
