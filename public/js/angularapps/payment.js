@@ -21,7 +21,13 @@ var payment = angular.module('payment', [])
 	}
 	
 	
-	
+	$scope.getStoredCreditCard = function(){
+		
+		$http.get('/payment/getcard/'+$scope.pay.savecc.id).success(function(response){
+			$scope.pay.details = response;
+		});
+		
+	}
 	
 	$scope.process = function(){
 		$scope.pay.processing = 1;
@@ -40,40 +46,45 @@ var payment = angular.module('payment', [])
 		data.payer.funding_instruments.push({credit_card:$scope.credit_card});
 		data.transactions.push({amount:$scope.amount,description:$scope.description});
 		
-		
-		
-		
-			$http.post('/payment',data).success(function(response){
-				
-				$scope.pay.processing = 0;
-				$scope.pay.success = 1;
-				$scope.pay.data = response;
-				
-				//If Save CC was selected hit up the save card api
-				if($scope.savecc)
-				{
-					var data = {
-							'_csrf': $scope.csrf,
-							'credit_card': $scope.credit_card,
-					};
-					
-					$http.post('/payment/savecard',data).success(function(response){
-						$scope.pay.savecc = response;
-					});
-					
-				}
+		$http.post('/payment',data).success(function(response){
 			
+			$scope.pay.processing = 0;
+			$scope.pay.success = 1;
+			$scope.pay.data = response;
+			
+			//If Save CC was selected hit up the save card api
+			if($scope.savecc)
+			{
+				var data = {
+						'_csrf': $scope.csrf,
+						'credit_card': $scope.credit_card,
+				};
 				
+				$http.post('/payment/savecard',data).success(function(response){
+					$scope.pay.savecc = response;
+				});
 				
-				
-			}).error(function(response){
-				
-				$scope.validation = response;
-				$scope.pay.processing = 0;
-			});
+			}
+		}).error(function(response){
+			
+			$scope.validation = response;
+			$scope.pay.processing = 0;
+		});
+	}
+	
+	$scope.storedprocess = function(){
 		
+		$http.get('/payment/stored/'+$scope.pay.savecc.id).success(function(response){
+			
+			$scope.pay.processing = 0;
+			$scope.pay.success = 1;
+			$scope.pay.storeddata = response;
 		
-		
+		}).error(function(response){
+			
+			$scope.validation = response;
+			$scope.pay.processing = 0;
+		});
 	}
 	
 	$scope.setVariables = function(variables){

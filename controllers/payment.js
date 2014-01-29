@@ -3,6 +3,7 @@
 
 var PaymentModel = require('../models/paymentModel');
 var paypal = require('paypal-rest-sdk');
+var http = require('http');
 
 module.exports = function (app) {
 
@@ -42,14 +43,69 @@ module.exports = function (app) {
         
     });
     
+    app.get('/payment/getcard/:id', function (req, res) {
+       
+        
+    	paypal.credit_card.get(req.params.id,{}, function (err, resp){
+    		if (err) {
+				 res.writeHead(500, { 'Content-Type': 'application/json' });
+	             res.write(JSON.stringify(err));
+	             res.end();
+	         }
+
+	         if (resp) {
+	        	 res.writeHead(200, { 'Content-Type': 'application/json' });
+	        	 res.write(JSON.stringify(resp));
+	             res.end();
+	         }
+    	});
+        
+    });
+    
     app.post('/payment', function (req, res) {
     	model.exchangeData(req.body);
+  
+    	//Execute the payment.
+    	paypal.payment.create(JSON.stringify(model), {}, function (err, resp) {
+            if (err) {
+            	res.writeHead(500, { 'Content-Type': 'application/json' });
+            	
+                res.write(JSON.stringify(err));
+                res.end();
+            }
+
+            if (resp) {
+            	res.writeHead(200, { 'Content-Type': 'application/json' });
+       
+            	res.write(JSON.stringify(resp));
+                res.end();
+            }
+        });
+    });
+    
+    app.get('/payment/stored/:id', function (req, res) {
     	
+    	var data = {
+    			intent: "sale",
+    			payer:{
+    				payment_method: "credit_card",
+    				funding_instruments:[{
+    				       credit_card_token:{
+    				    	   credit_card_id: req.params.id
+    				       }
+    				}]
+    			},
+    			transactions:[{
+    			     amount:{
+    			    	 "total":"6.70",
+    			    	 "currency":"USD"
+    			     },
+    			     description:"This is a payment on a stored card"
+    			}]
+    	}
     	
-    	
-    	
-    	
-    	
+    	model.exchangeData(data);
+  
     	//Execute the payment.
     	paypal.payment.create(JSON.stringify(model), {}, function (err, resp) {
             if (err) {

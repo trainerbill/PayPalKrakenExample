@@ -164,6 +164,61 @@
 							</tr>
 						</tbody>
 					</table>
+					<div class="btn btn-warning" data-ng-click="getStoredCreditCard()">For Science Lets get the Card Details</div>
+				</div>
+				<div class="row col-md-12" data-ng-show="pay.details">
+					<h3>I Bet these match</h3>
+					<table class="table">
+						<thead>
+							
+						</thead>
+						<tbody>
+							<tr>
+								<td>Card ID</td>
+								<td>{~lb}{~lb}pay.details.id{~rb}{~rb}</td>
+							</tr>
+							<tr>
+								<td>Type</td>
+								<td>{~lb}{~lb}pay.details.type{~rb}{~rb}</td>
+							</tr>
+							<tr>
+								<td>Number</td>
+								<td>{~lb}{~lb}pay.details.number{~rb}{~rb}</td>
+							</tr>
+							<tr>
+								<td>ExpMonth</td>
+								<td>{~lb}{~lb}pay.details.expire_month{~rb}{~rb}</td>
+							</tr>
+							<tr>
+								<td>ExpYear</td>
+								<td>{~lb}{~lb}pay.details.expire_year{~rb}{~rb}</td>
+							</tr>
+						</tbody>
+					</table>
+					<div class="btn btn-danger" data-ng-click="storedprocess()">Lets blow your mind and use your saved credit card</div>
+				</div>
+				
+				<div class="row col-md-12" data-ng-show="pay.storeddata">
+					<h3>Stored Payment Success</h3>
+					<table class="table">
+						<thead>
+							
+						</thead>
+						<tbody>
+							<tr>
+								<td>Transaction ID</td>
+								<td>{~lb}{~lb}pay.storeddata.id{~rb}{~rb}</td>
+							</tr>
+							<tr>
+								<td>Timestamp</td>
+								<td>{~lb}{~lb}pay.storeddata.create_time{~rb}{~rb}</td>
+							</tr>
+							<tr>
+								<td>Status</td>
+								<td>{~lb}{~lb}pay.storeddata.state{~rb}{~rb}</td>
+							</tr>
+						</tbody>
+					</table>
 				</div>
 			</div>		
 		</div>
