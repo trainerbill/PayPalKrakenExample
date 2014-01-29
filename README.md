@@ -7,6 +7,7 @@ Releases
 ==========================
 v1.x - Version 1 is the requirements based on the documentation provided<br/>
 v2.x - Attempt to use PayPal Rest SDK to pull in real transactions
+v3.x - Implemented stored credit card.  Store,get,use.
 
 
 Setup
