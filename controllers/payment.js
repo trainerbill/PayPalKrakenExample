@@ -15,6 +15,33 @@ module.exports = function (app) {
         
     });
     
+    app.post('/payment/savecard', function (req, res) {
+        var data = {
+        	type: req.body.credit_card.type,
+        	number: req.body.credit_card.number,
+        	expire_month:req.body.credit_card.expire_month,
+        	expire_year: req.body.credit_card.expire_year,
+        	first_name: req.body.credit_card.first_name,
+        	last_name:	req.body.credit_card.last_name
+        		
+        }
+        
+    	paypal.credit_card.create(data,{}, function (err, resp){
+    		if (err) {
+				 res.writeHead(500, { 'Content-Type': 'application/json' });
+	             res.write(JSON.stringify(err));
+	             res.end();
+	         }
+
+	         if (resp) {
+	        	 res.writeHead(200, { 'Content-Type': 'application/json' });
+	        	 res.write(JSON.stringify(resp));
+	             res.end();
+	         }
+    	});
+        
+    });
+    
     app.post('/payment', function (req, res) {
     	model.exchangeData(req.body);
     	

@@ -49,6 +49,21 @@ var payment = angular.module('payment', [])
 				$scope.pay.success = 1;
 				$scope.pay.data = response;
 				
+				//If Save CC was selected hit up the save card api
+				if($scope.savecc)
+				{
+					var data = {
+							'_csrf': $scope.csrf,
+							'credit_card': $scope.credit_card,
+					};
+					
+					$http.post('/payment/savecard',data).success(function(response){
+						$scope.pay.savecc = response;
+					});
+					
+				}
+			
+				
 				
 				
 			}).error(function(response){

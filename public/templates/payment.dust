@@ -68,6 +68,14 @@
 					    </div>
 					   
 				    </div>
+				   <div class="row col-md-12">
+				   		<div class=" checkbox">
+							<label>
+							<input type="checkbox" data-ng-model="savecc" >
+							Save this credit card for future purchases
+							</label>
+						</div>
+			       </div>
 				    
 				    
 				    <div class="form-group input-group">
@@ -103,8 +111,8 @@
 			<div data-ng-show="pay.processing">
 				<img class="img-responsive" src="img/loading.gif" alt="loading" />
 			</div>
-			<div data-ng-show="pay.success" class="row">
-				<div class="col-md-12">
+			<div data-ng-show="pay.success">
+				<div class="row col-md-12">
 					<h3>Payment Success</h3>
 					<table class="table">
 						<thead>
@@ -122,6 +130,37 @@
 							<tr>
 								<td>Status</td>
 								<td>{~lb}{~lb}pay.data.state{~rb}{~rb}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="row col-md-12" data-ng-show="pay.savecc">
+					<h3>Yo You saved your credit card!</h3>
+					<p>Though you will never need this information here it is</p>
+					<table class="table">
+						<thead>
+							
+						</thead>
+						<tbody>
+							<tr>
+								<td>Card ID</td>
+								<td>{~lb}{~lb}pay.savecc.id{~rb}{~rb}</td>
+							</tr>
+							<tr>
+								<td>Type</td>
+								<td>{~lb}{~lb}pay.savecc.type{~rb}{~rb}</td>
+							</tr>
+							<tr>
+								<td>Number</td>
+								<td>{~lb}{~lb}pay.savecc.number{~rb}{~rb}</td>
+							</tr>
+							<tr>
+								<td>ExpMonth</td>
+								<td>{~lb}{~lb}pay.savecc.expire_month{~rb}{~rb}</td>
+							</tr>
+							<tr>
+								<td>ExpYear</td>
+								<td>{~lb}{~lb}pay.savecc.expire_year{~rb}{~rb}</td>
 							</tr>
 						</tbody>
 					</table>
